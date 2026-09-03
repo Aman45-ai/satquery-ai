@@ -74,7 +74,7 @@ const validationChecks = [
     { label: "Task Compatibility", value: "Likely Match", color: "#34d399" }
 ]
 
-const Analysis = () => {
+const InputState = () => {
     return (
         <div className="min-h-screen  bg-[#020611] text-white">
             <div>
@@ -261,4 +261,4 @@ const Analysis = () => {
     )
 }
 
-export default Analysis
+export default InputState
