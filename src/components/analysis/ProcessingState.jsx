@@ -46,11 +46,7 @@ const ProcessingState = ({ analysisId, inputData, setStatus, setResult }) => {
             try {
                 const data = await getAnalysisStatus(analysisId)
 
-                setJob(data)
-
-                // Build a client-side execution trace: every time a step
-                // flips to "running" or "completed" we haven't recorded
-                // yet, log it with a timestamp.
+                setJob(data);
                 (data.steps || []).forEach((step) => {
                     const key = `${step.name}:${step.status}`
 
