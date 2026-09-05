@@ -16,7 +16,7 @@ const Sidebar = () => {
     const menuItems = [
         { path: "/", label: "Dashboard", icon: LayoutDashboard },
         { path: "/analysis/new", label: "New Analysis", icon: Sparkles },
-        { path: "/history", label: "History", icon: Clock3, disabled: true },
+        { path: "/history", label: "History", icon: Clock3 },
         { path: "/reports", label: "Reports", icon: FileText, disabled: true },
         { path: "/datasets", label: "Datasets", icon: FolderOpen, disabled: true },
         { path: "/model-hub", label: "Model Hub", icon: Grid2X2, disabled: true }
@@ -55,6 +55,7 @@ const Sidebar = () => {
                             <NavLink
                                 key={item.path}
                                 to={item.path}
+                                end={item.path === "/"}
                                 className={({ isActive }) =>
                                     `group flex h-11 w-full items-center gap-4 rounded-lg px-4 text-sm transition-all ${isActive
                                         ? "border border-blue-500/40 bg-linear-to-r from-blue-500/15 to-purple-500/10 text-cyan-300"
