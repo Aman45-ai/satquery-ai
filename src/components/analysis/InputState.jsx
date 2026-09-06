@@ -409,7 +409,7 @@ const InputState = (props) => {
         ?? "Auto (Recommended)"
 
     return (
-        <div className='relative px-4 py-6 sm:px-6 lg:px-8 xl:px-10'>
+        <div className='relative px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-6 xl:px-10'>
 
             {/* Ambient background glow */}
             <div className='pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.08),_transparent_70%)]' />

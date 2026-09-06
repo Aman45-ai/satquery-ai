@@ -97,7 +97,7 @@ const ProcessingState = ({ analysisId, inputData, setStatus, setResult }) => {
     const currentStepName = job?.step || "Preparing Analysis"
 
     return (
-        <div className='px-4 py-5 sm:px-6 lg:px-8 xl:px-10'>
+        <div className='px-4 pb-5 pt-16 sm:px-6 lg:px-8 lg:pt-5 xl:px-10'>
             <div className='mx-auto max-w-7xl'>
 
                 <div className='mb-6'>

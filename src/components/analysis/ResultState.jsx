@@ -78,7 +78,7 @@ const ResultState = (props) => {
 
     return (
         <div>
-            <div className='flex flex-col gap-4 px-4 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-10'>
+            <div className='flex flex-col gap-4 px-4 pt-16 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8 lg:pt-5 xl:px-10'>
                 <div>
                     <div className='flex flex-wrap items-center gap-3'>
                         <h1 className='flex items-center gap-2 text-2xl font-semibold sm:text-3xl'>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import {
     Activity,
-    ArrowUpRight,
     Brain,
     CheckCircle2,
     Clock3,
@@ -22,6 +21,7 @@ import {
 import { useNavigate } from "react-router-dom"
 import earthSatellite from "../../assets/earth-satellite.jpg"
 import { getDashboard } from "../../lib/api"
+import { getDisplayConfidence } from "../../utils/Confidence"
 
 const TYPE_COLORS = [
     "#22d3ee", // cyan
@@ -110,12 +110,10 @@ const DashboardContent = () => {
     }
 
     return (
-        <main className="min-w-0 overflow-hidden bg-[#020611] p-3 text-white sm:p-4 lg:p-6">
-
-            {/* Header */}
+        <main className="min-w-0 overflow-hidden bg-[#020611] p-3 pt-16 text-white sm:p-4 sm:pt-16 lg:p-6">
             <div className="mb-5 flex flex-col gap-4 sm:mb-6 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                    <div className="mb-1 flex items-center gap-2 text-sm text-slate-500">
+                    <div className="mb-1 flex items-center gap-2 text-xs text-slate-500 sm:text-sm">
                         <span>Dashboard</span>
                         <span>/</span>
                         <span className="text-slate-400">
@@ -123,7 +121,7 @@ const DashboardContent = () => {
                         </span>
                     </div>
 
-                    <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                    <h1 className="text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">
                         {getGreeting()}
                     </h1>
 
@@ -135,7 +133,7 @@ const DashboardContent = () => {
                 <div className="flex flex-wrap gap-2">
                     <button
                         onClick={fetchDashboard}
-                        className="flex items-center cursor-pointer gap-2 rounded-xl border border-white/10 bg-white/3 px-3 py-2 text-sm text-slate-300 transition hover:bg-white/[0.07] hover:text-white"
+                        className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/3 px-3 py-2 text-sm text-slate-300 transition hover:bg-white/[0.07] hover:text-white sm:flex-none"
                     >
                         <RefreshCw
                             size={16}
@@ -146,7 +144,7 @@ const DashboardContent = () => {
 
                     <button
                         onClick={() => navigate("/analysis/new")}
-                        className="flex items-center gap-2 rounded-xl cursor-pointer bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400"
+                        className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 sm:flex-none"
                     >
                         <PlusIcon />
                         New Analysis
@@ -170,7 +168,7 @@ const DashboardContent = () => {
 
                     <button
                         onClick={fetchDashboard}
-                        className="w-fit rounded-lg cursor-pointer border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 hover:bg-white/10"
+                        className="w-fit shrink-0 cursor-pointer rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 hover:bg-white/10"
                     >
                         Try Again
                     </button>
@@ -178,7 +176,7 @@ const DashboardContent = () => {
             )}
 
             {/* Stats */}
-            <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mb-5 grid grid-cols-1 gap-3 xs:grid-cols-2 sm:grid-cols-2 xl:grid-cols-4">
 
                 {/* Total Analyses */}
                 <div className="rounded-2xl border border-white/10 bg-white/2.5 p-4 sm:p-5">
@@ -199,7 +197,7 @@ const DashboardContent = () => {
                     {loading ? (
                         <div className="mt-2 h-8 w-16 animate-pulse rounded bg-white/10" />
                     ) : (
-                        <h2 className="mt-1 text-2xl font-semibold">
+                        <h2 className="mt-1 text-xl font-semibold sm:text-2xl">
                             {stats.total_analyses}
                         </h2>
                     )}
@@ -224,7 +222,7 @@ const DashboardContent = () => {
                     {loading ? (
                         <div className="mt-2 h-8 w-16 animate-pulse rounded bg-white/10" />
                     ) : (
-                        <h2 className="mt-1 text-2xl font-semibold">
+                        <h2 className="mt-1 text-xl font-semibold sm:text-2xl">
                             {stats.successful_analyses}
                         </h2>
                     )}
@@ -249,7 +247,7 @@ const DashboardContent = () => {
                     {loading ? (
                         <div className="mt-2 h-8 w-16 animate-pulse rounded bg-white/10" />
                     ) : (
-                        <h2 className="mt-1 text-2xl font-semibold">
+                        <h2 className="mt-1 text-xl font-semibold sm:text-2xl">
                             {stats.average_confidence}%
                         </h2>
                     )}
@@ -274,7 +272,7 @@ const DashboardContent = () => {
                     {loading ? (
                         <div className="mt-2 h-8 w-20 animate-pulse rounded bg-white/10" />
                     ) : (
-                        <h2 className="mt-1 text-2xl font-semibold">
+                        <h2 className="mt-1 text-xl font-semibold sm:text-2xl">
                             {stats.average_processing_time}s
                         </h2>
                     )}
@@ -286,7 +284,7 @@ const DashboardContent = () => {
             <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_330px]">
 
                 {/* Hero */}
-                <div className="relative min-h-70 overflow-hidden rounded-2xl border border-white/10 bg-[#07111f]">
+                <div className="relative min-h-60 overflow-hidden rounded-2xl border border-white/10 bg-[#07111f] sm:min-h-70">
                     <img
                         src={earthSatellite}
                         alt="Earth satellite"
@@ -295,13 +293,13 @@ const DashboardContent = () => {
 
                     <div className="absolute inset-0 bg-linear-to-r from-[#020611] via-[#020611]/75 to-transparent" />
 
-                    <div className="relative z-10 flex min-h-70 max-w-2xl flex-col justify-center p-5 sm:p-8">
+                    <div className="relative z-10 flex min-h-60 max-w-2xl flex-col justify-center p-5 sm:min-h-70 sm:p-8">
                         <div className="mb-4 flex w-fit items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1.5 text-xs text-cyan-300">
                             <Sparkles size={14} />
                             AI Earth Intelligence
                         </div>
 
-                        <h2 className="max-w-xl text-2xl font-semibold leading-tight sm:text-3xl">
+                        <h2 className="max-w-xl text-xl font-semibold leading-tight sm:text-2xl lg:text-3xl">
                             Turn satellite imagery into actionable intelligence.
                         </h2>
 
@@ -313,7 +311,7 @@ const DashboardContent = () => {
 
                         <button
                             onClick={() => navigate("/analysis/new")}
-                            className="mt-6 flex w-fit items-center cursor-pointer gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-slate-900 transition hover:bg-slate-200"
+                            className="mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-slate-900 transition hover:bg-slate-200"
                         >
                             <Play size={16} />
                             Start Analysis
@@ -393,7 +391,7 @@ const DashboardContent = () => {
             </div>
 
             {/* System status + Quick actions */}
-            <div className="mb-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-white/2.5 p-4 sm:p-5">
                     <h3 className="mb-4 font-medium">AI System Status</h3>
 
@@ -411,7 +409,7 @@ const DashboardContent = () => {
                 <div className="rounded-2xl border border-white/10 bg-white/2.5 p-4 sm:p-5">
                     <h3 className="mb-4 font-medium">Quick Actions</h3>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                         <QuickAction
                             icon={Upload}
                             label="New Analysis"
@@ -420,7 +418,7 @@ const DashboardContent = () => {
                         <QuickAction
                             icon={Clock3}
                             label="View History"
-                            onClick={() => navigate("/history") }
+                            onClick={() => navigate("/history")}
                             disabled
 
                         />
@@ -431,7 +429,7 @@ const DashboardContent = () => {
             </div>
 
             {/* Recent + Activity */}
-            <div className="grid grid-cols-1 gap-4 2xl:grid-cols-[minmax(0,1fr)_360px]">
+            <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
 
                 {/* Recent Analyses */}
                 <div className="min-w-0 rounded-2xl border border-white/10 bg-white/2.5">
@@ -533,9 +531,7 @@ const DashboardContent = () => {
                                             </td>
 
                                             <td className="px-4 py-4 text-sm text-slate-300">
-                                                {Math.round(
-                                                    (item.confidence || 0) * 100
-                                                )}%
+                                                {getDisplayConfidence(item)}
                                             </td>
 
                                             <td className="px-4 py-4">
@@ -660,8 +656,8 @@ const DonutChart = ({ items, total }) => {
     let offsetAccumulator = 0
 
     return (
-        <div className="relative h-35 w-35">
-            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <div className="relative h-32 w-32 shrink-0 sm:h-35 sm:w-35">
+            <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`}>
                 <circle
                     cx={size / 2}
                     cy={size / 2}
@@ -698,7 +694,7 @@ const DonutChart = ({ items, total }) => {
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-xl font-semibold">{total}</span>
+                <span className="text-lg font-semibold sm:text-xl">{total}</span>
                 <span className="text-[10px] text-slate-500">Total</span>
             </div>
         </div>
@@ -706,10 +702,10 @@ const DonutChart = ({ items, total }) => {
 }
 
 const StatusRow = ({ label, ok, okLabel = "Active" }) => (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-3">
         <span className="text-slate-400">{label}</span>
         <span
-            className={`flex items-center gap-1.5 text-xs ${
+            className={`flex shrink-0 items-center gap-1.5 text-xs ${
                 ok ? "text-emerald-300" : "text-amber-300"
             }`}
         >
@@ -727,14 +723,14 @@ const QuickAction = ({ icon: Icon, label, onClick, disabled }) => (
     <button
         onClick={disabled ? undefined : onClick}
         disabled={disabled}
-        className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-white/10 bg-black/20 py-4 text-xs transition ${
+        className={`flex flex-col items-center justify-center gap-2 rounded-xl border border-white/10 bg-black/20 py-3 text-[11px] transition sm:py-4 sm:text-xs ${
             disabled
                 ? "cursor-not-allowed text-slate-600"
-                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                : "cursor-pointer text-slate-300 hover:bg-white/5 hover:text-white"
         }`}
     >
         <Icon size={18} />
-        {label}
+        <span className="text-center leading-tight">{label}</span>
     </button>
 )
 
